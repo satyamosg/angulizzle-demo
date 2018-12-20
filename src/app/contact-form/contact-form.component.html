@@ -1,0 +1,209 @@
+<!-- <div class="container">
+  <form>
+    <div class="form-group">
+      <label for="firstNameInput">Name</label>
+      <input type="text" class="form-control" id="firstNameInput" placeholder="Enter First Name">
+      <small id="firstNameHelp" class="form-text text-danger">Name field is required</small>
+      <small id="firstNameHelp" class="form-text text-danger">Must be at least 3 characters</small>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
+      <small id="emailHelp" class="form-text text-danger">Email field is required</small>
+      <small id="emailHelp" class="form-text text-danger">Email is invalid</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="inputPassword1" placeholder="Enter Password">
+      <small id="passwordHelp" class="form-text text-danger">Password must be at least 6 characters</small>
+      <small id="passwordHelp" class="form-text text-danger">Password must contain a combination of uppercase, lowercase and numbers</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Confirm Password</label>
+      <input type="password" class="form-control" id="inputPassword1" placeholder="Confirm Password">
+      <small id="passwordHelp" class="form-text text-danger">Passwords don't match</small>
+    </div>  
+    <div class="form-group">
+      <label for="comment">Message:</label>
+      <textarea class="form-control" rows="5" id="comment" placeholder="Enter your message here"></textarea>
+      <small id="messageHelp" class="form-text text-danger">Message is required</small>
+    </div>
+    <div >
+        How did you hear about us?
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" value="">Email
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" value="">Flying Peach
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" value="">Giant Caterpillar
+        </label>
+      </div>
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Select here to subscribe to mailing list</label>
+      </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div> -->
+
+
+<div class="container">
+
+          <p> Name : {{ name | titlecase }} </p>
+          <p> Time : {{ lapTime | number: '1.0-3' }} </p>
+
+
+    <form #contactForm="ngForm" (ngSubmit) = "submit(contactForm.value)">
+      <div ngModelGroup="personalDetails" #personalDetails="ngModelGroup">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input 
+            name="name"
+            id="name"
+            #fullName="ngModel"
+            required
+            minlength="3"
+            ngModel
+            type="text" 
+            class="form-control" 
+            placeholder="Enter name">
+          <div *ngIf="fullName.invalid && fullName.touched" >
+            <small *ngIf="fullName.errors.required" class="form-text text-danger">Name field is required</small>
+            <small *ngIf="fullName.errors.minlength" class="form-text text-danger">Must be at least 3 characters</small>
+          </div>
+          <!-- <p>Valid : {{ fullName.valid }} </p>
+          <p>Touched : {{ fullName.touched }} </p> -->
+          <!-- <p>Errors : {{ fullName.errors | json }} </p> -->
+        </div>
+  
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            class="form-control" 
+            name="email"
+            id="email"
+            #emailAddress="ngModel"
+            required
+            ngModel
+            email
+            placeholder="Enter email">
+          <div *ngIf="emailAddress.invalid && emailAddress.touched">
+            <small *ngIf="emailAddress.errors.required" class="form-text text-danger">Email is required</small>
+            <small *ngIf="emailAddress.errors.email" class="form-text text-danger">Email is invalid</small>
+          </div>
+          <!-- <p>Errors : {{ emailAddress.errors.value.includes('@') | json }} </p> -->
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Message</label>
+        <textarea 
+          class="form-control"
+          name="message"
+          id="message"
+          #messageEntry="ngModel"
+          required
+          minlength="1"
+          ngModel 
+          placeholder="Enter message"></textarea>
+        <small *ngIf="messageEntry.invalid && messageEntry.touched" class="form-text text-danger">Message is required</small>
+      </div>
+      <div class="form-check mb-3">
+        <input 
+          type="checkbox" 
+          class="form-check-input"
+          name="mailing-list"
+          id="mailing-list"
+          #mailingList="ngModel"
+          required
+          ngModel>
+        <label class="form-check-label" for="mailing-list">Subscribe to mailing list</label>
+        <small *ngIf="!mailingList.touched" class="form-text text-danger">Required</small>
+      </div>
+
+    <label for="heard-about">How did you hear about us?</label>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input 
+            type="radio" 
+            class="form-check-input" 
+            #heardAbout="ngModel" 
+            ngModel
+            required
+            name="heard-about" 
+            value="email">
+            Email
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input 
+            type="radio" 
+            class="form-check-input" 
+            #heardAbout="ngModel" 
+            ngModel 
+            required
+            name="heard-about" 
+            value="peach">
+            Flying Peach
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input 
+            type="radio" 
+            class="form-check-input" 
+            #heardAbout="ngModel" 
+            ngModel 
+            required
+            name="heard-about" 
+            value="caterpillar">
+            Giant Caterpiller
+        </label>
+      </div>
+      <small *ngIf="heardAbout.touched &&heardAbout.invalid" class="form-text text-danger">Required</small>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          class="form-control"
+          name="password-entry"
+          id="password"
+          #passwordEntry="ngModel"
+          required
+          minlength="6"
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+          ngModel
+          placeholder="Password">
+        <div *ngIf="passwordEntry.touched && passwordEntry.invalid" >
+          <small *ngIf="passwordEntry.errors.required" class="form-text text-danger">Password is required</small>
+          <small *ngIf="passwordEntry.errors.minlength" class="form-text text-danger">Password must be at least 6 characters</small>
+          <small *ngIf="passwordEntry.errors.pattern" class="form-text text-danger">Password must contain a combination of uppercase, lowercase and numbers</small>
+        </div>
+        <input 
+          type="password" 
+          class="form-control mt-1"
+          name="passwordConfirm"
+          #passwordConfirm="ngModel"
+          required
+          ngModel 
+          placeholder="Confirm password">
+        <small *ngIf="passwordConfirm.touched && (passwordConfirm.value != passwordEntry.value)" class="form-text text-danger">Passwords don't match</small>
+      </div>
+      <p>{{ contactForm.value | json }} </p>
+      <p>{{ contactForm.valid | json }} </p>
+
+      <button [disabled]="contactForm.invalid || passwordConfirm.value != passwordEntry.value" type="submit" class="btn btn-primary">Get in touch</button>
+    </form>
+    </div>

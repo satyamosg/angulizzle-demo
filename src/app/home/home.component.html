@@ -1,0 +1,8 @@
+ <div class = "row">
+    <div class = "col" *ngFor="let card of cards">
+      <app-card 
+      title="{{card.title}}" 
+      text="{{card.text}}" 
+      buttontext="{{card.buttontext}}"></app-card>
+    </div>
+  </div>

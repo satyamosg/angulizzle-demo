@@ -1,0 +1,22 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">{{ welcome }}</h1>
+    <p *ngIf="name=='Saty'" class="lead">{{ subtext }}</p>
+    <hr class="my-4">
+    <p [hidden]="contentIsHidden" class="lead">{{ textinho }}</p>
+  </div>
+  <i class="fas fa-cannabis"></i>
+  <div>
+    <button (click)="toggleMenu()" class="btn btn-success btn-lg">
+      {{menuIsClosed ? 'Show':'Hide'}}
+    </button>
+    <ul [hidden]="menuIsClosed" class="list-group">
+      <li class="list-group-item active">surprise</li>
+      <li class="list-group-item">mother</li>
+      <li class="list-group-item">facka</li>
+    </ul>
+    <hr class="my-4">
+    <input placeholder="Name" [(ngModel)] = "name">
+    <p>{{ name }}</p>
+  </div>
+</div>

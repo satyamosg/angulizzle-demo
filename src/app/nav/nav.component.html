@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">{{ title }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#my-nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      <ul class="list-group">
+        <li class="list-group-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/" >Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="list-group-item" routerLinkActive="active">
+          <a routerLink="/page/1" >Page 1</a>
+        </li>
+        <li class="list-group-item" routerLinkActive="active">
+          <a routerLink="/page/2" >Page 2</a>
+        </li>
+      </ul>
+  </nav>
